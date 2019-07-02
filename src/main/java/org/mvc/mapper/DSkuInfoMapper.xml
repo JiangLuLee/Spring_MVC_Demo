@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.mvc.dao.DSkuInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.mvc.pojo.DSkuInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="SALE_ORDER_ITEM_ID" property="saleOrderItemId" jdbcType="BIGINT" />
+    <result column="SALE_ORDER_ID" property="saleOrderId" jdbcType="BIGINT" />
+    <result column="PURCHASER_ID" property="purchaserId" jdbcType="BIGINT" />
+    <result column="PURCHASER_ACCOUNT_ID" property="purchaserAccountId" jdbcType="BIGINT" />
+    <result column="PURCHASER_ACCOUNT_NAME" property="purchaserAccountName" jdbcType="VARCHAR" />
+    <result column="PROFESSIONAL_ORGANIZATION_ID" property="professionalOrganizationId" jdbcType="VARCHAR" />
+    <result column="GOODS_SUPPLIER_ID" property="goodsSupplierId" jdbcType="VARCHAR" />
+    <result column="SKU_ID" property="skuId" jdbcType="BIGINT" />
+    <result column="SKU_NAME" property="skuName" jdbcType="VARCHAR" />
+    <result column="SKU_SUPPLIER_ID" property="skuSupplierId" jdbcType="VARCHAR" />
+    <result column="SKU_SUPPLIER_NAME" property="skuSupplierName" jdbcType="VARCHAR" />
+    <result column="SKU_MATERIAL_ID" property="skuMaterialId" jdbcType="VARCHAR" />
+    <result column="SKU_EXT_SKU_ID" property="skuExtSkuId" jdbcType="VARCHAR" />
+    <result column="SKU_UPC_CODE" property="skuUpcCode" jdbcType="VARCHAR" />
+    <result column="SKU_COMMODITY_TYPE_ID" property="skuCommodityTypeId" jdbcType="BIGINT" />
+    <result column="SKU_LOCATION" property="skuLocation" jdbcType="INTEGER" />
+    <result column="SKU_MAIN_PIC_URL" property="skuMainPicUrl" jdbcType="VARCHAR" />
+    <result column="SKU_SALE_AREA" property="skuSaleArea" jdbcType="INTEGER" />
+    <result column="SKU_STATUS" property="skuStatus" jdbcType="INTEGER" />
+    <result column="SKU_BRAND_ID" property="skuBrandId" jdbcType="BIGINT" />
+    <result column="SKU_BRAND_NAME" property="skuBrandName" jdbcType="VARCHAR" />
+    <result column="SKU_IS_SUPPLIER_AGREEMENT" property="skuIsSupplierAgreement" jdbcType="INTEGER" />
+    <result column="SKU_MARKET_PRICE" property="skuMarketPrice" jdbcType="BIGINT" />
+    <result column="SKU_AGREEMENT_PRICE" property="skuAgreementPrice" jdbcType="BIGINT" />
+    <result column="SKU_MEMBER_PRICE" property="skuMemberPrice" jdbcType="BIGINT" />
+    <result column="SKU_SALE_PRICE" property="skuSalePrice" jdbcType="BIGINT" />
+    <result column="SKU_CURRENCY_TYPE" property="skuCurrencyType" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="GOODS_SOURCE" property="goodsSource" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.mvc.pojo.DSkuInfo" extends="BaseResultMap" >
+    <result column="SKU_DETAIL" property="skuDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SALE_ORDER_ITEM_ID, SALE_ORDER_ID, PURCHASER_ID, PURCHASER_ACCOUNT_ID, PURCHASER_ACCOUNT_NAME, 
+    PROFESSIONAL_ORGANIZATION_ID, GOODS_SUPPLIER_ID, SKU_ID, SKU_NAME, SKU_SUPPLIER_ID, 
+    SKU_SUPPLIER_NAME, SKU_MATERIAL_ID, SKU_EXT_SKU_ID, SKU_UPC_CODE, SKU_COMMODITY_TYPE_ID, 
+    SKU_LOCATION, SKU_MAIN_PIC_URL, SKU_SALE_AREA, SKU_STATUS, SKU_BRAND_ID, SKU_BRAND_NAME, 
+    SKU_IS_SUPPLIER_AGREEMENT, SKU_MARKET_PRICE, SKU_AGREEMENT_PRICE, SKU_MEMBER_PRICE, 
+    SKU_SALE_PRICE, SKU_CURRENCY_TYPE, CREATE_TIME, GOODS_SOURCE
+  </sql>
+  <sql id="Blob_Column_List" >
+    SKU_DETAIL
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="org.mvc.pojo.DSkuInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from d_sku_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.mvc.pojo.DSkuInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from d_sku_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from d_sku_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from d_sku_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.mvc.pojo.DSkuInfoExample" >
+    delete from d_sku_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.mvc.pojo.DSkuInfo" >
+    insert into d_sku_info (ID, SALE_ORDER_ITEM_ID, SALE_ORDER_ID, 
+      PURCHASER_ID, PURCHASER_ACCOUNT_ID, PURCHASER_ACCOUNT_NAME, 
+      PROFESSIONAL_ORGANIZATION_ID, GOODS_SUPPLIER_ID, 
+      SKU_ID, SKU_NAME, SKU_SUPPLIER_ID, 
+      SKU_SUPPLIER_NAME, SKU_MATERIAL_ID, SKU_EXT_SKU_ID, 
+      SKU_UPC_CODE, SKU_COMMODITY_TYPE_ID, SKU_LOCATION, 
+      SKU_MAIN_PIC_URL, SKU_SALE_AREA, SKU_STATUS, 
+      SKU_BRAND_ID, SKU_BRAND_NAME, SKU_IS_SUPPLIER_AGREEMENT, 
+      SKU_MARKET_PRICE, SKU_AGREEMENT_PRICE, SKU_MEMBER_PRICE, 
+      SKU_SALE_PRICE, SKU_CURRENCY_TYPE, CREATE_TIME, 
+      GOODS_SOURCE, SKU_DETAIL)
+    values (#{id,jdbcType=BIGINT}, #{saleOrderItemId,jdbcType=BIGINT}, #{saleOrderId,jdbcType=BIGINT}, 
+      #{purchaserId,jdbcType=BIGINT}, #{purchaserAccountId,jdbcType=BIGINT}, #{purchaserAccountName,jdbcType=VARCHAR}, 
+      #{professionalOrganizationId,jdbcType=VARCHAR}, #{goodsSupplierId,jdbcType=VARCHAR}, 
+      #{skuId,jdbcType=BIGINT}, #{skuName,jdbcType=VARCHAR}, #{skuSupplierId,jdbcType=VARCHAR}, 
+      #{skuSupplierName,jdbcType=VARCHAR}, #{skuMaterialId,jdbcType=VARCHAR}, #{skuExtSkuId,jdbcType=VARCHAR}, 
+      #{skuUpcCode,jdbcType=VARCHAR}, #{skuCommodityTypeId,jdbcType=BIGINT}, #{skuLocation,jdbcType=INTEGER}, 
+      #{skuMainPicUrl,jdbcType=VARCHAR}, #{skuSaleArea,jdbcType=INTEGER}, #{skuStatus,jdbcType=INTEGER}, 
+      #{skuBrandId,jdbcType=BIGINT}, #{skuBrandName,jdbcType=VARCHAR}, #{skuIsSupplierAgreement,jdbcType=INTEGER}, 
+      #{skuMarketPrice,jdbcType=BIGINT}, #{skuAgreementPrice,jdbcType=BIGINT}, #{skuMemberPrice,jdbcType=BIGINT}, 
+      #{skuSalePrice,jdbcType=BIGINT}, #{skuCurrencyType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{goodsSource,jdbcType=VARCHAR}, #{skuDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.mvc.pojo.DSkuInfo" >
+    insert into d_sku_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="saleOrderItemId != null" >
+        SALE_ORDER_ITEM_ID,
+      </if>
+      <if test="saleOrderId != null" >
+        SALE_ORDER_ID,
+      </if>
+      <if test="purchaserId != null" >
+        PURCHASER_ID,
+      </if>
+      <if test="purchaserAccountId != null" >
+        PURCHASER_ACCOUNT_ID,
+      </if>
+      <if test="purchaserAccountName != null" >
+        PURCHASER_ACCOUNT_NAME,
+      </if>
+      <if test="professionalOrganizationId != null" >
+        PROFESSIONAL_ORGANIZATION_ID,
+      </if>
+      <if test="goodsSupplierId != null" >
+        GOODS_SUPPLIER_ID,
+      </if>
+      <if test="skuId != null" >
+        SKU_ID,
+      </if>
+      <if test="skuName != null" >
+        SKU_NAME,
+      </if>
+      <if test="skuSupplierId != null" >
+        SKU_SUPPLIER_ID,
+      </if>
+      <if test="skuSupplierName != null" >
+        SKU_SUPPLIER_NAME,
+      </if>
+      <if test="skuMaterialId != null" >
+        SKU_MATERIAL_ID,
+      </if>
+      <if test="skuExtSkuId != null" >
+        SKU_EXT_SKU_ID,
+      </if>
+      <if test="skuUpcCode != null" >
+        SKU_UPC_CODE,
+      </if>
+      <if test="skuCommodityTypeId != null" >
+        SKU_COMMODITY_TYPE_ID,
+      </if>
+      <if test="skuLocation != null" >
+        SKU_LOCATION,
+      </if>
+      <if test="skuMainPicUrl != null" >
+        SKU_MAIN_PIC_URL,
+      </if>
+      <if test="skuSaleArea != null" >
+        SKU_SALE_AREA,
+      </if>
+      <if test="skuStatus != null" >
+        SKU_STATUS,
+      </if>
+      <if test="skuBrandId != null" >
+        SKU_BRAND_ID,
+      </if>
+      <if test="skuBrandName != null" >
+        SKU_BRAND_NAME,
+      </if>
+      <if test="skuIsSupplierAgreement != null" >
+        SKU_IS_SUPPLIER_AGREEMENT,
+      </if>
+      <if test="skuMarketPrice != null" >
+        SKU_MARKET_PRICE,
+      </if>
+      <if test="skuAgreementPrice != null" >
+        SKU_AGREEMENT_PRICE,
+      </if>
+      <if test="skuMemberPrice != null" >
+        SKU_MEMBER_PRICE,
+      </if>
+      <if test="skuSalePrice != null" >
+        SKU_SALE_PRICE,
+      </if>
+      <if test="skuCurrencyType != null" >
+        SKU_CURRENCY_TYPE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="goodsSource != null" >
+        GOODS_SOURCE,
+      </if>
+      <if test="skuDetail != null" >
+        SKU_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="saleOrderItemId != null" >
+        #{saleOrderItemId,jdbcType=BIGINT},
+      </if>
+      <if test="saleOrderId != null" >
+        #{saleOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaserId != null" >
+        #{purchaserId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaserAccountId != null" >
+        #{purchaserAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaserAccountName != null" >
+        #{purchaserAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalOrganizationId != null" >
+        #{professionalOrganizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSupplierId != null" >
+        #{goodsSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuName != null" >
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSupplierId != null" >
+        #{skuSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSupplierName != null" >
+        #{skuSupplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuMaterialId != null" >
+        #{skuMaterialId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuExtSkuId != null" >
+        #{skuExtSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuUpcCode != null" >
+        #{skuUpcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCommodityTypeId != null" >
+        #{skuCommodityTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="skuLocation != null" >
+        #{skuLocation,jdbcType=INTEGER},
+      </if>
+      <if test="skuMainPicUrl != null" >
+        #{skuMainPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSaleArea != null" >
+        #{skuSaleArea,jdbcType=INTEGER},
+      </if>
+      <if test="skuStatus != null" >
+        #{skuStatus,jdbcType=INTEGER},
+      </if>
+      <if test="skuBrandId != null" >
+        #{skuBrandId,jdbcType=BIGINT},
+      </if>
+      <if test="skuBrandName != null" >
+        #{skuBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuIsSupplierAgreement != null" >
+        #{skuIsSupplierAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="skuMarketPrice != null" >
+        #{skuMarketPrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuAgreementPrice != null" >
+        #{skuAgreementPrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuMemberPrice != null" >
+        #{skuMemberPrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuSalePrice != null" >
+        #{skuSalePrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuCurrencyType != null" >
+        #{skuCurrencyType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsSource != null" >
+        #{goodsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="skuDetail != null" >
+        #{skuDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.mvc.pojo.DSkuInfoExample" resultType="java.lang.Integer" >
+    select count(*) from d_sku_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update d_sku_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.saleOrderItemId != null" >
+        SALE_ORDER_ITEM_ID = #{record.saleOrderItemId,jdbcType=BIGINT},
+      </if>
+      <if test="record.saleOrderId != null" >
+        SALE_ORDER_ID = #{record.saleOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.purchaserId != null" >
+        PURCHASER_ID = #{record.purchaserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.purchaserAccountId != null" >
+        PURCHASER_ACCOUNT_ID = #{record.purchaserAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.purchaserAccountName != null" >
+        PURCHASER_ACCOUNT_NAME = #{record.purchaserAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professionalOrganizationId != null" >
+        PROFESSIONAL_ORGANIZATION_ID = #{record.professionalOrganizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsSupplierId != null" >
+        GOODS_SUPPLIER_ID = #{record.goodsSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuId != null" >
+        SKU_ID = #{record.skuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuName != null" >
+        SKU_NAME = #{record.skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuSupplierId != null" >
+        SKU_SUPPLIER_ID = #{record.skuSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuSupplierName != null" >
+        SKU_SUPPLIER_NAME = #{record.skuSupplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuMaterialId != null" >
+        SKU_MATERIAL_ID = #{record.skuMaterialId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuExtSkuId != null" >
+        SKU_EXT_SKU_ID = #{record.skuExtSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuUpcCode != null" >
+        SKU_UPC_CODE = #{record.skuUpcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuCommodityTypeId != null" >
+        SKU_COMMODITY_TYPE_ID = #{record.skuCommodityTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuLocation != null" >
+        SKU_LOCATION = #{record.skuLocation,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuMainPicUrl != null" >
+        SKU_MAIN_PIC_URL = #{record.skuMainPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuSaleArea != null" >
+        SKU_SALE_AREA = #{record.skuSaleArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuStatus != null" >
+        SKU_STATUS = #{record.skuStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuBrandId != null" >
+        SKU_BRAND_ID = #{record.skuBrandId,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuBrandName != null" >
+        SKU_BRAND_NAME = #{record.skuBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuIsSupplierAgreement != null" >
+        SKU_IS_SUPPLIER_AGREEMENT = #{record.skuIsSupplierAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuMarketPrice != null" >
+        SKU_MARKET_PRICE = #{record.skuMarketPrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuAgreementPrice != null" >
+        SKU_AGREEMENT_PRICE = #{record.skuAgreementPrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuMemberPrice != null" >
+        SKU_MEMBER_PRICE = #{record.skuMemberPrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuSalePrice != null" >
+        SKU_SALE_PRICE = #{record.skuSalePrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuCurrencyType != null" >
+        SKU_CURRENCY_TYPE = #{record.skuCurrencyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodsSource != null" >
+        GOODS_SOURCE = #{record.goodsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuDetail != null" >
+        SKU_DETAIL = #{record.skuDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update d_sku_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      SALE_ORDER_ITEM_ID = #{record.saleOrderItemId,jdbcType=BIGINT},
+      SALE_ORDER_ID = #{record.saleOrderId,jdbcType=BIGINT},
+      PURCHASER_ID = #{record.purchaserId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_ID = #{record.purchaserAccountId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_NAME = #{record.purchaserAccountName,jdbcType=VARCHAR},
+      PROFESSIONAL_ORGANIZATION_ID = #{record.professionalOrganizationId,jdbcType=VARCHAR},
+      GOODS_SUPPLIER_ID = #{record.goodsSupplierId,jdbcType=VARCHAR},
+      SKU_ID = #{record.skuId,jdbcType=BIGINT},
+      SKU_NAME = #{record.skuName,jdbcType=VARCHAR},
+      SKU_SUPPLIER_ID = #{record.skuSupplierId,jdbcType=VARCHAR},
+      SKU_SUPPLIER_NAME = #{record.skuSupplierName,jdbcType=VARCHAR},
+      SKU_MATERIAL_ID = #{record.skuMaterialId,jdbcType=VARCHAR},
+      SKU_EXT_SKU_ID = #{record.skuExtSkuId,jdbcType=VARCHAR},
+      SKU_UPC_CODE = #{record.skuUpcCode,jdbcType=VARCHAR},
+      SKU_COMMODITY_TYPE_ID = #{record.skuCommodityTypeId,jdbcType=BIGINT},
+      SKU_LOCATION = #{record.skuLocation,jdbcType=INTEGER},
+      SKU_MAIN_PIC_URL = #{record.skuMainPicUrl,jdbcType=VARCHAR},
+      SKU_SALE_AREA = #{record.skuSaleArea,jdbcType=INTEGER},
+      SKU_STATUS = #{record.skuStatus,jdbcType=INTEGER},
+      SKU_BRAND_ID = #{record.skuBrandId,jdbcType=BIGINT},
+      SKU_BRAND_NAME = #{record.skuBrandName,jdbcType=VARCHAR},
+      SKU_IS_SUPPLIER_AGREEMENT = #{record.skuIsSupplierAgreement,jdbcType=INTEGER},
+      SKU_MARKET_PRICE = #{record.skuMarketPrice,jdbcType=BIGINT},
+      SKU_AGREEMENT_PRICE = #{record.skuAgreementPrice,jdbcType=BIGINT},
+      SKU_MEMBER_PRICE = #{record.skuMemberPrice,jdbcType=BIGINT},
+      SKU_SALE_PRICE = #{record.skuSalePrice,jdbcType=BIGINT},
+      SKU_CURRENCY_TYPE = #{record.skuCurrencyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      GOODS_SOURCE = #{record.goodsSource,jdbcType=VARCHAR},
+      SKU_DETAIL = #{record.skuDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update d_sku_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      SALE_ORDER_ITEM_ID = #{record.saleOrderItemId,jdbcType=BIGINT},
+      SALE_ORDER_ID = #{record.saleOrderId,jdbcType=BIGINT},
+      PURCHASER_ID = #{record.purchaserId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_ID = #{record.purchaserAccountId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_NAME = #{record.purchaserAccountName,jdbcType=VARCHAR},
+      PROFESSIONAL_ORGANIZATION_ID = #{record.professionalOrganizationId,jdbcType=VARCHAR},
+      GOODS_SUPPLIER_ID = #{record.goodsSupplierId,jdbcType=VARCHAR},
+      SKU_ID = #{record.skuId,jdbcType=BIGINT},
+      SKU_NAME = #{record.skuName,jdbcType=VARCHAR},
+      SKU_SUPPLIER_ID = #{record.skuSupplierId,jdbcType=VARCHAR},
+      SKU_SUPPLIER_NAME = #{record.skuSupplierName,jdbcType=VARCHAR},
+      SKU_MATERIAL_ID = #{record.skuMaterialId,jdbcType=VARCHAR},
+      SKU_EXT_SKU_ID = #{record.skuExtSkuId,jdbcType=VARCHAR},
+      SKU_UPC_CODE = #{record.skuUpcCode,jdbcType=VARCHAR},
+      SKU_COMMODITY_TYPE_ID = #{record.skuCommodityTypeId,jdbcType=BIGINT},
+      SKU_LOCATION = #{record.skuLocation,jdbcType=INTEGER},
+      SKU_MAIN_PIC_URL = #{record.skuMainPicUrl,jdbcType=VARCHAR},
+      SKU_SALE_AREA = #{record.skuSaleArea,jdbcType=INTEGER},
+      SKU_STATUS = #{record.skuStatus,jdbcType=INTEGER},
+      SKU_BRAND_ID = #{record.skuBrandId,jdbcType=BIGINT},
+      SKU_BRAND_NAME = #{record.skuBrandName,jdbcType=VARCHAR},
+      SKU_IS_SUPPLIER_AGREEMENT = #{record.skuIsSupplierAgreement,jdbcType=INTEGER},
+      SKU_MARKET_PRICE = #{record.skuMarketPrice,jdbcType=BIGINT},
+      SKU_AGREEMENT_PRICE = #{record.skuAgreementPrice,jdbcType=BIGINT},
+      SKU_MEMBER_PRICE = #{record.skuMemberPrice,jdbcType=BIGINT},
+      SKU_SALE_PRICE = #{record.skuSalePrice,jdbcType=BIGINT},
+      SKU_CURRENCY_TYPE = #{record.skuCurrencyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      GOODS_SOURCE = #{record.goodsSource,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.mvc.pojo.DSkuInfo" >
+    update d_sku_info
+    <set >
+      <if test="saleOrderItemId != null" >
+        SALE_ORDER_ITEM_ID = #{saleOrderItemId,jdbcType=BIGINT},
+      </if>
+      <if test="saleOrderId != null" >
+        SALE_ORDER_ID = #{saleOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaserId != null" >
+        PURCHASER_ID = #{purchaserId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaserAccountId != null" >
+        PURCHASER_ACCOUNT_ID = #{purchaserAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaserAccountName != null" >
+        PURCHASER_ACCOUNT_NAME = #{purchaserAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalOrganizationId != null" >
+        PROFESSIONAL_ORGANIZATION_ID = #{professionalOrganizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSupplierId != null" >
+        GOODS_SUPPLIER_ID = #{goodsSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        SKU_ID = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuName != null" >
+        SKU_NAME = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSupplierId != null" >
+        SKU_SUPPLIER_ID = #{skuSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSupplierName != null" >
+        SKU_SUPPLIER_NAME = #{skuSupplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuMaterialId != null" >
+        SKU_MATERIAL_ID = #{skuMaterialId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuExtSkuId != null" >
+        SKU_EXT_SKU_ID = #{skuExtSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuUpcCode != null" >
+        SKU_UPC_CODE = #{skuUpcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCommodityTypeId != null" >
+        SKU_COMMODITY_TYPE_ID = #{skuCommodityTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="skuLocation != null" >
+        SKU_LOCATION = #{skuLocation,jdbcType=INTEGER},
+      </if>
+      <if test="skuMainPicUrl != null" >
+        SKU_MAIN_PIC_URL = #{skuMainPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSaleArea != null" >
+        SKU_SALE_AREA = #{skuSaleArea,jdbcType=INTEGER},
+      </if>
+      <if test="skuStatus != null" >
+        SKU_STATUS = #{skuStatus,jdbcType=INTEGER},
+      </if>
+      <if test="skuBrandId != null" >
+        SKU_BRAND_ID = #{skuBrandId,jdbcType=BIGINT},
+      </if>
+      <if test="skuBrandName != null" >
+        SKU_BRAND_NAME = #{skuBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuIsSupplierAgreement != null" >
+        SKU_IS_SUPPLIER_AGREEMENT = #{skuIsSupplierAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="skuMarketPrice != null" >
+        SKU_MARKET_PRICE = #{skuMarketPrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuAgreementPrice != null" >
+        SKU_AGREEMENT_PRICE = #{skuAgreementPrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuMemberPrice != null" >
+        SKU_MEMBER_PRICE = #{skuMemberPrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuSalePrice != null" >
+        SKU_SALE_PRICE = #{skuSalePrice,jdbcType=BIGINT},
+      </if>
+      <if test="skuCurrencyType != null" >
+        SKU_CURRENCY_TYPE = #{skuCurrencyType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsSource != null" >
+        GOODS_SOURCE = #{goodsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="skuDetail != null" >
+        SKU_DETAIL = #{skuDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.mvc.pojo.DSkuInfo" >
+    update d_sku_info
+    set SALE_ORDER_ITEM_ID = #{saleOrderItemId,jdbcType=BIGINT},
+      SALE_ORDER_ID = #{saleOrderId,jdbcType=BIGINT},
+      PURCHASER_ID = #{purchaserId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_ID = #{purchaserAccountId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_NAME = #{purchaserAccountName,jdbcType=VARCHAR},
+      PROFESSIONAL_ORGANIZATION_ID = #{professionalOrganizationId,jdbcType=VARCHAR},
+      GOODS_SUPPLIER_ID = #{goodsSupplierId,jdbcType=VARCHAR},
+      SKU_ID = #{skuId,jdbcType=BIGINT},
+      SKU_NAME = #{skuName,jdbcType=VARCHAR},
+      SKU_SUPPLIER_ID = #{skuSupplierId,jdbcType=VARCHAR},
+      SKU_SUPPLIER_NAME = #{skuSupplierName,jdbcType=VARCHAR},
+      SKU_MATERIAL_ID = #{skuMaterialId,jdbcType=VARCHAR},
+      SKU_EXT_SKU_ID = #{skuExtSkuId,jdbcType=VARCHAR},
+      SKU_UPC_CODE = #{skuUpcCode,jdbcType=VARCHAR},
+      SKU_COMMODITY_TYPE_ID = #{skuCommodityTypeId,jdbcType=BIGINT},
+      SKU_LOCATION = #{skuLocation,jdbcType=INTEGER},
+      SKU_MAIN_PIC_URL = #{skuMainPicUrl,jdbcType=VARCHAR},
+      SKU_SALE_AREA = #{skuSaleArea,jdbcType=INTEGER},
+      SKU_STATUS = #{skuStatus,jdbcType=INTEGER},
+      SKU_BRAND_ID = #{skuBrandId,jdbcType=BIGINT},
+      SKU_BRAND_NAME = #{skuBrandName,jdbcType=VARCHAR},
+      SKU_IS_SUPPLIER_AGREEMENT = #{skuIsSupplierAgreement,jdbcType=INTEGER},
+      SKU_MARKET_PRICE = #{skuMarketPrice,jdbcType=BIGINT},
+      SKU_AGREEMENT_PRICE = #{skuAgreementPrice,jdbcType=BIGINT},
+      SKU_MEMBER_PRICE = #{skuMemberPrice,jdbcType=BIGINT},
+      SKU_SALE_PRICE = #{skuSalePrice,jdbcType=BIGINT},
+      SKU_CURRENCY_TYPE = #{skuCurrencyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      GOODS_SOURCE = #{goodsSource,jdbcType=VARCHAR},
+      SKU_DETAIL = #{skuDetail,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.mvc.pojo.DSkuInfo" >
+    update d_sku_info
+    set SALE_ORDER_ITEM_ID = #{saleOrderItemId,jdbcType=BIGINT},
+      SALE_ORDER_ID = #{saleOrderId,jdbcType=BIGINT},
+      PURCHASER_ID = #{purchaserId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_ID = #{purchaserAccountId,jdbcType=BIGINT},
+      PURCHASER_ACCOUNT_NAME = #{purchaserAccountName,jdbcType=VARCHAR},
+      PROFESSIONAL_ORGANIZATION_ID = #{professionalOrganizationId,jdbcType=VARCHAR},
+      GOODS_SUPPLIER_ID = #{goodsSupplierId,jdbcType=VARCHAR},
+      SKU_ID = #{skuId,jdbcType=BIGINT},
+      SKU_NAME = #{skuName,jdbcType=VARCHAR},
+      SKU_SUPPLIER_ID = #{skuSupplierId,jdbcType=VARCHAR},
+      SKU_SUPPLIER_NAME = #{skuSupplierName,jdbcType=VARCHAR},
+      SKU_MATERIAL_ID = #{skuMaterialId,jdbcType=VARCHAR},
+      SKU_EXT_SKU_ID = #{skuExtSkuId,jdbcType=VARCHAR},
+      SKU_UPC_CODE = #{skuUpcCode,jdbcType=VARCHAR},
+      SKU_COMMODITY_TYPE_ID = #{skuCommodityTypeId,jdbcType=BIGINT},
+      SKU_LOCATION = #{skuLocation,jdbcType=INTEGER},
+      SKU_MAIN_PIC_URL = #{skuMainPicUrl,jdbcType=VARCHAR},
+      SKU_SALE_AREA = #{skuSaleArea,jdbcType=INTEGER},
+      SKU_STATUS = #{skuStatus,jdbcType=INTEGER},
+      SKU_BRAND_ID = #{skuBrandId,jdbcType=BIGINT},
+      SKU_BRAND_NAME = #{skuBrandName,jdbcType=VARCHAR},
+      SKU_IS_SUPPLIER_AGREEMENT = #{skuIsSupplierAgreement,jdbcType=INTEGER},
+      SKU_MARKET_PRICE = #{skuMarketPrice,jdbcType=BIGINT},
+      SKU_AGREEMENT_PRICE = #{skuAgreementPrice,jdbcType=BIGINT},
+      SKU_MEMBER_PRICE = #{skuMemberPrice,jdbcType=BIGINT},
+      SKU_SALE_PRICE = #{skuSalePrice,jdbcType=BIGINT},
+      SKU_CURRENCY_TYPE = #{skuCurrencyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      GOODS_SOURCE = #{goodsSource,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

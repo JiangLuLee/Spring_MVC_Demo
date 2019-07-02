@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!-- 配置文件路径 -->
+    <properties resource="generatorConfig.properties" />
+
+    <!--指定对应的连接驱动jar包的位置-->
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <!--配置生成pojo中的toString()方法-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!--打开注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--数据库连接信息 -->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!--将BigDecimal转化为对应的Java类型-->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--生成的model 包路径 -->
+        <javaModelGenerator targetPackage="${pojo.package}"
+                            targetProject="${target.project}">
+            <property name="enableSubPackages" value="ture" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--mapper文件-->
+        <sqlMapGenerator targetPackage="${xml.mapper.package}"
+                         targetProject="${target.project}">
+            <property name="enableSubPackages" value="ture" />
+        </sqlMapGenerator>
+
+        <!--dao的java文件-->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${dao.package}"
+                             targetProject="${target.project}">
+            <property name="enableSubPackages" value="ture" />
+        </javaClientGenerator>
+
+        <!--表-->
+        <table tableName="d_sku_info" enableSelectByExample="true"></table>
+    </context>
+</generatorConfiguration>
