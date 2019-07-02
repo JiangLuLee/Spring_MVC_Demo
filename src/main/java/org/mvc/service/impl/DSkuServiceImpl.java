@@ -30,6 +30,6 @@ public class DSkuServiceImpl implements DSkuService {
         DSkuInfoExample example = new DSkuInfoExample();
         example.createCriteria().andIdIsNotNull();
         List<DSkuInfo> skuInfoList = dSkuInfoMapper.selectByExample(example);
-        return skuInfoList;
+        return skuInfoList.subList(0,9);
     }
 }
